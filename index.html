@@ -1,328 +1,109 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-
-<meta charset="UTF-8">
-<title>Kurdii Creative OS</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins;
-}
-
-body{
-
-background:linear-gradient(120deg,#020617,#0f172a,#020617);
-color:white;
-min-height:100vh;
-
-}
-
-/* HERO */
-
-.hero{
-
-height:40vh;
-background:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee") center/cover;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-
-}
-
-.hero h1{
-
-font-size:42px;
-background:rgba(0,0,0,0.55);
-padding:20px 40px;
-border-radius:10px;
-
-}
-
-/* DASHBOARD */
-
-.dashboard{
-
-padding:30px;
-
-}
-
-/* GRID */
-
-.grid{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-
-}
-
-/* CARDS */
-
-.card{
-
-background:linear-gradient(145deg,#0f172a,#1e293b);
-padding:25px;
-border-radius:14px;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
-transition:0.3s;
-
-}
-
-.card:hover{
-
-transform:translateY(-6px) scale(1.03);
-
-}
-
-/* BUTTONS */
-
-.btn{
-
-display:block;
-margin-top:12px;
-padding:12px;
-text-align:center;
-border-radius:8px;
-text-decoration:none;
-color:white;
-background:linear-gradient(45deg,#2563eb,#7c3aed);
-transition:0.3s;
-
-}
-
-.btn:hover{
-
-background:linear-gradient(45deg,#9333ea,#2563eb);
-
-}
-
-/* SECTION */
-
-.section{
-
-margin-top:40px;
-
-}
-
-.section h2{
-
-margin-bottom:15px;
-color:#60a5fa;
-
-}
-
-/* IDEA BOX */
-
-.idea{
-
-background:#020617;
-padding:20px;
-border-radius:10px;
-margin-top:10px;
-
-}
-
-.generate{
-
-margin-top:10px;
-padding:12px;
-width:100%;
-background:#22c55e;
-border:none;
-border-radius:8px;
-color:white;
-font-size:16px;
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-<div class="hero">
-
-<h1>Kurdii Creative AI Studio</h1>
-
-</div>
-
-
-<div class="dashboard">
-
-
 <div class="section">
 
-<h2>Quick Tools</h2>
+<h2>Creative Power Tools</h2>
 
 <div class="grid">
 
 <div class="card">
-
-<h3>Instagram</h3>
-
-<a class="btn" href="https://www.instagram.com/dreamway_dmc" target="_blank">Open</a>
-
+<h3>Midjourney Prompts</h3>
+<a class="btn" href="https://promptomania.com" target="_blank">Open</a>
 </div>
 
 <div class="card">
-
-<h3>ChatGPT</h3>
-
-<a class="btn" href="https://chat.openai.com" target="_blank">Open</a>
-
+<h3>Leonardo AI</h3>
+<a class="btn" href="https://leonardo.ai" target="_blank">Open</a>
 </div>
 
 <div class="card">
-
-<h3>Freepik</h3>
-
-<a class="btn" href="https://freepik.com" target="_blank">Open</a>
-
+<h3>Runway AI Video</h3>
+<a class="btn" href="https://runwayml.com" target="_blank">Open</a>
 </div>
 
 <div class="card">
-
-<h3>Behance</h3>
-
-<a class="btn" href="https://behance.net" target="_blank">Open</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="section">
-
-<h2>AI Idea Generator</h2>
-
-<div class="idea" id="ideaBox">
-
-Press Generate to create an idea
-
-</div>
-
-<button class="generate" onclick="generateIdea()">Generate Creative Idea</button>
-
-</div>
-
-
-<div class="section">
-
-<h2>Daily Training</h2>
-
-<div class="grid">
-
-<div class="card">
-
-Illustrator Challenge  
-Create futuristic travel logo for Jordan tourism brand.
-
+<h3>Pika Video AI</h3>
+<a class="btn" href="https://pika.art" target="_blank">Open</a>
 </div>
 
 <div class="card">
-
-Photoshop Challenge  
-Create cinematic desert poster with Wadi Rum atmosphere.
-
+<h3>Krea AI</h3>
+<a class="btn" href="https://krea.ai" target="_blank">Open</a>
 </div>
-
-</div>
-
-</div>
-
-
-<div class="section">
-
-<h2>Freelance Platforms</h2>
-
-<div class="grid">
 
 <div class="card">
+<h3>Dribbble Inspiration</h3>
+<a class="btn" href="https://dribbble.com" target="_blank">Open</a>
+</div>
 
-Upwork
+<div class="card">
+<h3>Mobbin UI Library</h3>
+<a class="btn" href="https://mobbin.com" target="_blank">Open</a>
+</div>
 
+<div class="card">
+<h3>Logo Inspiration</h3>
+<a class="btn" href="https://logoipsum.com" target="_blank">Open</a>
+</div>
+
+<div class="card">
+<h3>Font Pairing</h3>
+<a class="btn" href="https://fontjoy.com" target="_blank">Open</a>
+</div>
+
+<div class="card">
+<h3>Color Palette</h3>
+<a class="btn" href="https://coolors.co" target="_blank">Open</a>
+</div>
+
+<div class="card">
+<h3>Reel Hooks</h3>
+<a class="btn" href="https://chat.openai.com" target="_blank">Generate</a>
+</div>
+
+<div class="card">
+<h3>Caption Generator</h3>
+<a class="btn" href="https://copy.ai" target="_blank">Generate</a>
+</div>
+
+<div class="card">
+<h3>Story Ideas</h3>
+<a class="btn" href="https://chat.openai.com" target="_blank">Generate</a>
+</div>
+
+<div class="card">
+<h3>Viral Analyzer</h3>
+<a class="btn" href="https://notjustanalytics.com" target="_blank">Open</a>
+</div>
+
+<div class="card">
+<h3>Ad Concept Tool</h3>
+<a class="btn" href="https://adcreative.ai" target="_blank">Open</a>
+</div>
+
+<div class="card">
+<h3>Upwork Jobs</h3>
 <a class="btn" href="https://upwork.com" target="_blank">Explore</a>
-
 </div>
 
 <div class="card">
-
-Fiverr
-
+<h3>Fiverr Ideas</h3>
 <a class="btn" href="https://fiverr.com" target="_blank">Explore</a>
-
 </div>
 
 <div class="card">
+<h3>Creative Market</h3>
+<a class="btn" href="https://creativemarket.com" target="_blank">Explore</a>
+</div>
 
-Contra
+<div class="card">
+<h3>Envato Elements</h3>
+<a class="btn" href="https://elements.envato.com" target="_blank">Explore</a>
+</div>
 
-<a class="btn" href="https://contra.com" target="_blank">Explore</a>
-
+<div class="card">
+<h3>Etsy Digital</h3>
+<a class="btn" href="https://etsy.com" target="_blank">Explore</a>
 </div>
 
 </div>
 
 </div>
-
-
-</div>
-
-
-<script>
-
-function random(arr){
-
-return arr[Math.floor(Math.random()*arr.length)]
-
-}
-
-function generateIdea(){
-
-let ideas=[
-
-"Create cinematic Petra tourism campaign",
-
-"Design luxury Arabic coffee advertisement",
-
-"Create futuristic Jordan travel poster",
-
-"Wadi Rum adventure reel concept",
-
-"Minimalist Arabic typography travel brand",
-
-"AI generated desert fashion campaign",
-
-"Luxury Dead Sea resort advertisement",
-
-"Create Instagram carousel about Petra history",
-
-"Jordan tourism AI poster series",
-
-"Arabic coffee cinematic product ad"
-
-]
-
-document.getElementById("ideaBox").innerText=random(ideas)
-
-}
-
-</script>
-
-
-</body>
-
-</html>
