@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kurdii Brand Prompt Engine</title>
+<title>Kurdii Money Tracker</title>
 
 <style>
 
@@ -12,203 +12,49 @@ font-family:Arial;
 background:#0f172a;
 color:white;
 margin:0;
+padding:20px;
 }
 
-.header{
-background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
-background-size:cover;
-background-position:center;
-padding:70px 20px;
+h1{
 text-align:center;
-}
-
-.header h1{
-background:rgba(0,0,0,0.6);
-padding:15px 30px;
-border-radius:10px;
-display:inline-block;
+margin-bottom:30px;
 }
 
 .container{
-max-width:900px;
+max-width:500px;
 margin:auto;
-padding:30px;
 }
 
 .card{
 background:#1e293b;
-padding:25px;
+padding:20px;
 border-radius:12px;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 input{
 width:100%;
 padding:12px;
+margin-top:10px;
 border-radius:8px;
 border:none;
-margin-top:10px;
 }
 
 button{
 margin-top:12px;
-padding:12px 20px;
+padding:12px;
 border:none;
 border-radius:8px;
 background:#6366f1;
 color:white;
 cursor:pointer;
+width:100%;
 }
 
-pre{
-background:#020617;
-padding:15px;
-border-radius:8px;
-overflow:auto;
-margin-top:15px;
+.result{
+font-size:20px;
+margin-top:10px;
 }
 
-</style>
-</head>
-
-<body>
-
-<div class="header">
-<h1>Kurdii Creative AI Studio</h1>
-</div>
-
-<div class="container">
-
-<div class="card">
-
-<h2>Brand Prompt Generator</h2>
-
-<p>اكتب اسم البراند:</p>
-
-<input id="brandInput" placeholder="example: بن العميد">
-
-<p>فكرة الحملة (اختياري):</p>
-
-<input id="campaignInput" placeholder="example: luxury coffee advertisement">
-
-<button onclick="generatePrompts()">Generate Brand Prompts</button>
-
-<button onclick="copyPrompts()">Copy</button>
-
-<pre id="output">
-Waiting...
-</pre>
-
-</div>
-
-</div>
-
-
-<script>
-
-const brandDatabase={
-
-"بن العميد":{
-category:"coffee brand",
-style:"arabic luxury heritage",
-products:"arabic coffee",
-colors:"gold and dark brown",
-emotion:"warm hospitality"
-},
-
-"al ameede":{
-category:"coffee brand",
-style:"arabic luxury heritage",
-products:"arabic coffee",
-colors:"gold and dark brown",
-emotion:"warm hospitality"
-}
-
-}
-
-
-function analyzeBrand(name){
-
-let lower=name.toLowerCase()
-
-if(brandDatabase[lower]){
-
-return brandDatabase[lower]
-
-}
-
-return{
-
-category:"consumer brand",
-style:"modern advertising",
-products:"main product",
-colors:"brand colors",
-emotion:"premium brand feeling"
-
-}
-
-}
-
-
-function generatePrompts(){
-
-let brand=document.getElementById("brandInput").value
-let campaign=document.getElementById("campaignInput").value
-
-if(!brand){
-alert("write brand name")
-return
-}
-
-let analysis=analyzeBrand(brand)
-
-let prompts=[]
-
-for(let i=1;i<=10;i++){
-
-prompts.push({
-
-brand:brand,
-
-category:analysis.category,
-
-brand_style:analysis.style,
-
-campaign:campaign,
-
-concept:"ad concept "+i,
-
-prompt:brand+" "+campaign+" cinematic advertisement "+analysis.style+" dramatic lighting ultra realistic"
-
-})
-
-}
-
-let result={
-
-brand_analysis:analysis,
-
-prompts:prompts
-
-}
-
-document.getElementById("output").textContent=
-JSON.stringify(result,null,2)
-
-}
-
-
-function copyPrompts(){
-
-let text=document.getElementById("output").textContent
-
-navigator.clipboard.writeText(text)
-
-alert("Copied")
-
-}
-
-</script>
-
-</body>
-</html>
+.green{color:#22c55e;}
+.red{color
