@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kurdii Creative AI</title>
+<title>Kurdii Creative AI Studio</title>
 
 <style>
 
@@ -15,7 +12,6 @@ font-family:Arial;
 background:#0f172a;
 color:white;
 margin:0;
-padding:0;
 }
 
 .header{
@@ -34,19 +30,43 @@ border-radius:10px;
 }
 
 .container{
-padding:30px;
-max-width:900px;
+max-width:1000px;
 margin:auto;
+padding:30px;
 }
 
 .card{
 background:#1e293b;
-padding:20px;
-border-radius:12px;
-margin-bottom:20px;
+padding:25px;
+border-radius:14px;
+margin-bottom:25px;
+}
+
+.tools{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+a.tool{
+background:#334155;
+padding:12px;
+border-radius:8px;
+color:white;
+text-decoration:none;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:none;
+margin-top:10px;
 }
 
 button{
+margin-top:10px;
 padding:12px 20px;
 border:none;
 border-radius:8px;
@@ -55,19 +75,15 @@ color:white;
 cursor:pointer;
 }
 
-button:hover{
-background:#4f46e5;
-}
-
 pre{
 background:#020617;
 padding:15px;
 border-radius:8px;
 overflow:auto;
+margin-top:15px;
 }
 
 </style>
-
 </head>
 
 <body>
@@ -79,79 +95,90 @@ overflow:auto;
 <div class="container">
 
 <div class="card">
+<h2>Quick Tools</h2>
+
+<div class="tools">
+
+<a class="tool" href="https://chat.openai.com" target="_blank">ChatGPT</a>
+<a class="tool" href="https://freepik.com" target="_blank">Freepik</a>
+<a class="tool" href="https://leonardo.ai" target="_blank">Leonardo AI</a>
+<a class="tool" href="https://runwayml.com" target="_blank">Runway AI</a>
+
+</div>
+
+</div>
+
+
+<div class="card">
 
 <h2>AI Prompt Generator</h2>
 
-<pre id="promptBox">
-Press Generate
+<p>اكتب فكرة مشروعك:</p>
+
+<input id="ideaInput" placeholder="example: Petra tourism cinematic reel">
+
+<button onclick="generatePrompts()">Generate 10 JSON Prompts</button>
+
+<button onclick="copyPrompts()">Copy All</button>
+
+<pre id="promptOutput">
+Waiting for idea...
 </pre>
 
-<button onclick="generatePrompt()">Generate JSON Prompt</button>
-<button onclick="copyPrompt()">Copy</button>
-
 </div>
 
 </div>
+
 
 <script>
 
-function generatePrompt(){
+function generatePrompts(){
 
-const prompts=[
+let idea=document.getElementById("ideaInput").value
 
-{
-scene:"Petra cinematic reveal",
-style:"epic cinematic lighting",
-camera:"drone wide shot",
-colors:"warm desert tones",
-prompt:"cinematic drone shot revealing Petra treasury at sunrise ultra detailed 8k"
-},
-
-{
-scene:"Wadi Rum adventure",
-style:"desert action",
-camera:"low angle tracking",
-colors:"orange sand contrast",
-prompt:"4x4 jeep driving through Wadi Rum desert dust cinematic lighting"
-},
-
-{
-scene:"Arabic coffee ad",
-style:"luxury product",
-camera:"macro shot",
-colors:"dark gold tones",
-prompt:"luxury arabic coffee steam cinematic product shot dark background"
-},
-
-{
-scene:"Dead Sea luxury",
-style:"travel advertisement",
-camera:"aerial shot",
-colors:"soft calm tones",
-prompt:"aerial cinematic Dead Sea resort luxury travel ad"
+if(!idea){
+alert("write idea first")
+return
 }
 
-]
+let prompts=[]
 
-let randomPrompt=prompts[Math.floor(Math.random()*prompts.length)]
+for(let i=1;i<=10;i++){
 
-document.getElementById("promptBox").textContent=
-JSON.stringify(randomPrompt,null,2)
+prompts.push({
+
+idea:idea,
+
+scene:"concept "+i,
+
+style:"cinematic advertising",
+
+camera:"dramatic composition",
+
+lighting:"epic cinematic lighting",
+
+prompt:idea+" cinematic advertising scene "+i+" ultra detailed 8k dramatic lighting"
+
+})
 
 }
 
-function copyPrompt(){
+document.getElementById("promptOutput").textContent=
+JSON.stringify(prompts,null,2)
 
-let text=document.getElementById("promptBox").textContent
+}
+
+function copyPrompts(){
+
+let text=document.getElementById("promptOutput").textContent
 
 navigator.clipboard.writeText(text)
 
-alert("Prompt copied")
+alert("Copied")
 
 }
 
 </script>
 
 </body>
-
 </html>
