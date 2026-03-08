@@ -1,375 +1,71 @@
-<!doctype html>
-<html lang="ar">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Kurdii — Creative Command</title>
+<div class="section">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<h2>AI Prompt Generator</h2>
 
-<style>
-:root{
-  --bg:#071022;
-  --panel:#0f1722;
-  --muted:#93b3d6;
-  --accent1:#6b8cff;
-  --accent2:#9b5bff;
-  --glass: rgba(255,255,255,0.03);
-  --card-shadow: 0 8px 30px rgba(2,8,23,0.6);
-  --radius:14px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter,system-ui,Arial;
-  background: linear-gradient(180deg,var(--bg) 0%, #071426 60%);
-  color:#e6f0ff;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  direction: rtl;
-}
+<div class="idea" id="promptOutput">
+Press Generate Prompt
+</div>
 
-/* header / hero */
-.header{
-  background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1e18b3b2b6b8f2f7f84a9d4ea8d2c8c2');
-  background-size:cover;
-  background-position:center;
-  padding:48px 20px 60px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.header .hero-box{
-  width:100%;
-  max-width:1100px;
-  background: linear-gradient(90deg, rgba(4,10,20,0.6), rgba(6,12,26,0.6));
-  border-radius:20px;
-  padding:28px;
-  box-shadow: var(--card-shadow);
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
-.brand{
-  min-width:84px;
-  height:84px;
-  border-radius:14px;
-  background: linear-gradient(135deg,var(--accent1),var(--accent2));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  color:white;
-  font-size:20px;
-  box-shadow:0 6px 20px rgba(107,140,255,0.15), inset 0 -6px 20px rgba(0,0,0,0.2);
-}
-.hero-content h1{
-  margin:0 0 6px 0;
-  font-size:22px;
-  letter-spacing:0.2px;
-}
-.hero-content p{
-  margin:0;
-  color:var(--muted);
-  font-size:13px;
-}
+<button class="generate" onclick="generatePrompt()">
+Generate JSON Prompt
+</button>
 
-/* main layout */
-.main{
-  max-width:1100px;
-  margin:28px auto;
-  padding:0 18px 80px;
-}
+</div>
 
-/* search / quick actions top row */
-.top-row{
-  display:flex;
-  gap:18px;
-  align-items:center;
-  margin-bottom:22px;
-  flex-wrap:wrap;
-}
-.search{
-  flex:1 1 360px;
-  background:var(--panel);
-  border-radius:12px;
-  padding:10px 12px;
-  box-shadow:var(--card-shadow);
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-.search input{
-  background:transparent;
-  border:0;
-  outline:none;
-  color: #dceeff;
-  font-size:15px;
-  flex:1;
-}
-.action-row{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-/* tidy cards grid */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(3,minmax(0,1fr));
-  gap:18px;
-}
-@media (max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:560px){ .grid{grid-template-columns:repeat(1,1fr)} }
-
-/* card */
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius: var(--radius);
-  padding:18px;
-  box-shadow: var(--card-shadow);
-  min-height:110px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-.card h3{margin:0 0 8px 0;font-size:15px}
-.card p{margin:0;color:var(--muted);font-size:13px}
-
-/* button styles */
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  text-decoration:none;
-  color:white;
-  padding:10px 12px;
-  border-radius:10px;
-  font-weight:600;
-  background:linear-gradient(90deg,var(--accent1),var(--accent2));
-  box-shadow: 0 6px 18px rgba(107,140,255,0.12);
-  border:0;
-}
-.btn.ghost{
-  background:transparent;
-  color:var(--muted);
-  border:1px solid rgba(255,255,255,0.04);
-  box-shadow:none;
-}
-
-/* small utilities */
-.tools-row{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-}
-.tool-pill{
-  background:var(--glass);
-  padding:8px 12px;
-  border-radius:999px;
-  color:var(--muted);
-  font-size:13px;
-  border:1px solid rgba(255,255,255,0.02);
-}
-
-/* more tools panel (collapsed) */
-.more-panel{
-  margin-top:18px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:12px;
-}
-.more-card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
-  border-radius:12px;
-  padding:12px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  border:1px solid rgba(255,255,255,0.02);
-}
-.toggle-more{
-  background:transparent;
-  border:1px dashed rgba(255,255,255,0.03);
-  padding:10px 12px;
-  border-radius:12px;
-  color:var(--muted);
-  cursor:pointer;
-}
-
-/* idea box */
-.idea-box{
-  margin-top:18px;
-  background: linear-gradient(180deg, rgba(9,14,26,0.7), rgba(6,10,18,0.6));
-  padding:16px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.02);
-  color:#dbecff;
-}
-.idea-actions{display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap}
-.small{font-size:13px;color:var(--muted)}
-
-/* footer small */
-.footer-note{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
-
-/* subtle hover transitions */
-a.btn, .toggle-more, .card{transition:all .22s ease}
-a.btn:active{transform:translateY(1px)}
-</style>
-</head>
-<body>
-
-<!-- header / hero -->
-<header class="header">
-  <div class="hero-box">
-    <div class="brand">KD</div>
-    <div class="hero-content" style="flex:1">
-      <h1>لوحة التحكم الإبداعية — Kurdii</h1>
-      <p class="small">مركز واحد لكل أدوات التصميم، التوليد، والأفكار. انسخ، جرب، نفّذ.</p>
-    </div>
-    <div style="display:flex;gap:10px;align-items:center">
-      <a class="btn" href="https://www.instagram.com/dreamway_dmc" target="_blank" title="Instagram">حسابتك</a>
-    </div>
-  </div>
-</header>
-
-<!-- main container -->
-<main class="main">
-  <div class="container">
-
-    <!-- search & quick -->
-    <div class="top-row">
-      <div class="search" role="search" aria-label="search tools">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.8">
-          <path d="M21 21l-4.35-4.35" stroke="#9fb7e0" stroke-width="1.6" stroke-linecap="round"/>
-          <circle cx="11" cy="11" r="5.2" stroke="#9fb7e0" stroke-width="1.6" fill="none"/>
-        </svg>
-        <input id="search" placeholder="ابحث عن أداة أو اكتب فكرة (مثال: Petra poster)" />
-        <button class="btn ghost" onclick="focusSearch()">بحث</button>
-      </div>
-
-      <div class="action-row">
-        <div class="tool-pill">أفكار يومية</div>
-        <div class="tool-pill" id="followers">متابعين: —</div>
-      </div>
-    </div>
-
-    <!-- main grid (kept compact: 6 primary cards) -->
-    <section class="grid" aria-label="quick tools">
-      <div class="card">
-        <h3>مولد فكرة سريع</h3>
-        <p class="small">أعطيك زاوية إعلان + Prompt جاهز للصور.</p>
-        <div style="display:flex;gap:10px;align-items:center;margin-top:12px">
-          <button class="btn" onclick="generateCreative()">إولد فكرة</button>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>أدوات سريعة</h3>
-        <p class="small">أزرار لأشهر الأدوات التي تستخدمها يومياً.</p>
-        <div class="tools-row" style="margin-top:12px">
-          <a class="btn ghost" href="https://chat.openai.com" target="_blank">ChatGPT</a>
-          <a class="btn ghost" href="https://freepik.com" target="_blank">Freepik</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>تدريبات التصميم</h3>
-        <p class="small">مهمات سريعة لتطوير المهارة يومياً.</p>
-        <div style="margin-top:12px" class="small">Illustrator • Photoshop • Motion</div>
-      </div>
-
-      <div class="card">
-        <h3>مكتبة الإلهام</h3>
-        <p class="small">dribbble / behance / moodboards</p>
-        <div style="margin-top:12px">
-          <a class="btn" href="https://dribbble.com" target="_blank">Dribbble</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>فرص عمل</h3>
-        <p class="small">سريع للوصول لمنصات العمل الحر.</p>
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn ghost" href="https://upwork.com" target="_blank">Upwork</a>
-          <a class="btn ghost" href="https://fiverr.com" target="_blank">Fiverr</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>الأدوات المتقدمة</h3>
-        <p class="small">مزيد من أدوات الجيل والصورة والفيديو — مخفي لتحافظ على النظافة.</p>
-        <div style="margin-top:12px">
-          <button class="toggle-more" id="toggleMore" onclick="toggleMore()">عرض المزيد ▾</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- collapsed more tools -->
-    <div id="morePanel" style="display:none" class="more-panel" aria-hidden="true">
-      <!-- we show a handful cleanly; you can edit links later -->
-      <div class="more-card"><div>Midjourney prompts</div><a class="btn" href="https://promptomania.com" target="_blank">فتح</a></div>
-      <div class="more-card"><div>Leonardo AI</div><a class="btn" href="https://leonardo.ai" target="_blank">فتح</a></div>
-      <div class="more-card"><div>Runway</div><a class="btn" href="https://runwayml.com" target="_blank">فتح</a></div>
-      <div class="more-card"><div>Pika Video</div><a class="btn" href="https://pika.art" target="_blank">فتح</a></div>
-      <div class="more-card"><div>Color palettes</div><a class="btn" href="https://coolors.co" target="_blank">فتح</a></div>
-      <div class="more-card"><div>Logo inspo</div><a class="btn" href="https://logoipsum.com" target="_blank">فتح</a></div>
-      <div class="more-card"><div>Font pairing</div><a class="btn" href="https://fontjoy.com" target="_blank">فتح</a></div>
-      <div class="more-card"><div>Creative Market</div><a class="btn" href="https://creativemarket.com" target="_blank">فتح</a></div>
-    </div>
-
-    <!-- idea box -->
-    <div class="idea-box" id="ideaBox" role="status" aria-live="polite">
-      <strong id="ideaTitle">جاهز — اضغط "إولد فكرة".</strong>
-      <div id="ideaText" style="margin-top:10px;color:var(--muted)">سأعطيك هنا: عنوان الفكرة • زاوية تسويقية • برومبت صورة</div>
-
-      <div class="idea-actions">
-        <button class="btn" onclick="generateCreative()">إولد فكرة جديدة</button>
-        <button class="btn ghost" onclick="copyIdea()">نسخ الفكرة</button>
-        <div class="small">مثال: «Petra cinematic reveal — golden hour, drone, epic»</div>
-      </div>
-    </div>
-
-    <div class="footer-note">نسخة مبسطة ومرتبة — للتعديل أو إضافة أدوات قل لي: "عدّل اللون" أو "أضف لوجو".</div>
-
-  </div>
-</main>
 
 <script>
-/* simple interactions */
-function focusSearch(){document.getElementById('search').focus()}
 
-function toggleMore(){
-  const panel = document.getElementById('morePanel');
-  const btn = document.getElementById('toggleMore');
-  if(panel.style.display === 'none'){ panel.style.display='grid'; btn.textContent='إخفاء المزيد ▴'; panel.setAttribute('aria-hidden','false') }
-  else { panel.style.display='none'; btn.textContent='عرض المزيد ▾'; panel.setAttribute('aria-hidden','true') }
+function generatePrompt(){
+
+const prompts=[
+
+{
+scene:"Petra cinematic reveal",
+style:"epic cinematic lighting",
+camera:"drone wide shot",
+colors:"warm desert tones",
+prompt:"cinematic drone shot revealing Petra treasury at sunrise, epic lighting, ultra realistic, 8k"
+},
+
+{
+scene:"Wadi Rum adventure",
+style:"desert action",
+camera:"low angle tracking shot",
+colors:"orange sand contrast",
+prompt:"4x4 jeep driving through Wadi Rum desert dust trail cinematic lighting ultra detailed"
+},
+
+{
+scene:"Arabic coffee advertisement",
+style:"luxury product ad",
+camera:"macro lens",
+colors:"dark gold tones",
+prompt:"luxury arabic coffee cup steam cinematic lighting dark background premium product shot"
+},
+
+{
+scene:"Dead Sea luxury",
+style:"spa advertisement",
+camera:"aerial shot",
+colors:"soft blue calm tones",
+prompt:"aerial cinematic view of Dead Sea spa resort luxury travel advertisement"
+},
+
+{
+scene:"Jerash history",
+style:"historical documentary",
+camera:"steady cinematic shot",
+colors:"warm ancient tones",
+prompt:"roman columns in Jerash cinematic sunset light historical atmosphere ultra detailed"
 }
 
-/* creative idea generator (small but useful) */
-const IDEAS = [
-  {title:'Petra cinematic reveal', angle:'زاوية: قصة اكتشاف — مطلع ذهبي', prompt:'golden hour cinematic wide shot, Petra, dramatic lighting, drone, ultra-detailed'},
-  {title:'Wadi Rum jeep adventure', angle:'زاوية: تجربة مغامرة — حس الحركة', prompt:'desert jeep action, dust trails, wide lens, cinematic color grading'},
-  {title:'Arabic coffee premium ad', angle:'زاوية: حُرفي / تراثي', prompt:'closeup coffee steam, dark moody, bokeh, premium packaging, shallow DOF'},
-  {title:'Dead Sea wellness', angle:'زاوية: رفاهية وعافية', prompt:'luxury spa at Dead Sea, aerial, soft tones, serene atmosphere'},
-  {title:'Jerash ancient walk', angle:'زاوية: تاريخ حي', prompt:'Roman columns golden light, cinematic portrait, tourists exploring'}
-];
+]
 
-function generateCreative(){
-  const pick = IDEAS[Math.floor(Math.random()*IDEAS.length)];
-  document.getElementById('ideaTitle').textContent = pick.title + ' — ' + pick.angle;
-  document.getElementById('ideaText').textContent = 'Prompt (لـ image-gen): ' + pick.prompt;
-}
-function copyIdea(){
-  const text = document.getElementById('ideaTitle').textContent + '\n' + document.getElementById('ideaText').textContent;
-  navigator.clipboard?.writeText(text).then(()=>{ alert('نسخت الفكرة لل clipboard') }, ()=>{ alert('النسخ لم ينجح — انسخ يدوي') })
-}
+let randomPrompt=prompts[Math.floor(Math.random()*prompts.length)]
 
-/* small: show followers placeholder (you can integrate actual data later) */
-document.getElementById('followers').textContent = 'متابعين: — (ربط لاحق)';
+document.getElementById("promptOutput").innerText=
+JSON.stringify(randomPrompt,null,2)
+
+}
 
 </script>
-</body>
-</html>
