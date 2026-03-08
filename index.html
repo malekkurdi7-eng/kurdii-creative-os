@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kurdii Creative AI Studio</title>
+<title>Kurdii Brand Prompt Engine</title>
 
 <style>
 
@@ -18,19 +18,19 @@ margin:0;
 background-image:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee");
 background-size:cover;
 background-position:center;
-padding:80px 20px;
+padding:70px 20px;
 text-align:center;
 }
 
 .header h1{
 background:rgba(0,0,0,0.6);
-display:inline-block;
 padding:15px 30px;
 border-radius:10px;
+display:inline-block;
 }
 
 .container{
-max-width:1000px;
+max-width:900px;
 margin:auto;
 padding:30px;
 }
@@ -38,23 +38,8 @@ padding:30px;
 .card{
 background:#1e293b;
 padding:25px;
-border-radius:14px;
+border-radius:12px;
 margin-bottom:25px;
-}
-
-.tools{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:12px;
-}
-
-a.tool{
-background:#334155;
-padding:12px;
-border-radius:8px;
-color:white;
-text-decoration:none;
-text-align:center;
 }
 
 input{
@@ -66,7 +51,7 @@ margin-top:10px;
 }
 
 button{
-margin-top:10px;
+margin-top:12px;
 padding:12px 20px;
 border:none;
 border-radius:8px;
@@ -95,34 +80,23 @@ margin-top:15px;
 <div class="container">
 
 <div class="card">
-<h2>Quick Tools</h2>
 
-<div class="tools">
+<h2>Brand Prompt Generator</h2>
 
-<a class="tool" href="https://chat.openai.com" target="_blank">ChatGPT</a>
-<a class="tool" href="https://freepik.com" target="_blank">Freepik</a>
-<a class="tool" href="https://leonardo.ai" target="_blank">Leonardo AI</a>
-<a class="tool" href="https://runwayml.com" target="_blank">Runway AI</a>
+<p>اكتب اسم البراند:</p>
 
-</div>
+<input id="brandInput" placeholder="example: بن العميد">
 
-</div>
+<p>فكرة الحملة (اختياري):</p>
 
+<input id="campaignInput" placeholder="example: luxury coffee advertisement">
 
-<div class="card">
+<button onclick="generatePrompts()">Generate Brand Prompts</button>
 
-<h2>AI Prompt Generator</h2>
+<button onclick="copyPrompts()">Copy</button>
 
-<p>اكتب فكرة مشروعك:</p>
-
-<input id="ideaInput" placeholder="example: Petra tourism cinematic reel">
-
-<button onclick="generatePrompts()">Generate 10 JSON Prompts</button>
-
-<button onclick="copyPrompts()">Copy All</button>
-
-<pre id="promptOutput">
-Waiting for idea...
+<pre id="output">
+Waiting...
 </pre>
 
 </div>
@@ -132,14 +106,61 @@ Waiting for idea...
 
 <script>
 
+const brandDatabase={
+
+"بن العميد":{
+category:"coffee brand",
+style:"arabic luxury heritage",
+products:"arabic coffee",
+colors:"gold and dark brown",
+emotion:"warm hospitality"
+},
+
+"al ameede":{
+category:"coffee brand",
+style:"arabic luxury heritage",
+products:"arabic coffee",
+colors:"gold and dark brown",
+emotion:"warm hospitality"
+}
+
+}
+
+
+function analyzeBrand(name){
+
+let lower=name.toLowerCase()
+
+if(brandDatabase[lower]){
+
+return brandDatabase[lower]
+
+}
+
+return{
+
+category:"consumer brand",
+style:"modern advertising",
+products:"main product",
+colors:"brand colors",
+emotion:"premium brand feeling"
+
+}
+
+}
+
+
 function generatePrompts(){
 
-let idea=document.getElementById("ideaInput").value
+let brand=document.getElementById("brandInput").value
+let campaign=document.getElementById("campaignInput").value
 
-if(!idea){
-alert("write idea first")
+if(!brand){
+alert("write brand name")
 return
 }
+
+let analysis=analyzeBrand(brand)
 
 let prompts=[]
 
@@ -147,30 +168,39 @@ for(let i=1;i<=10;i++){
 
 prompts.push({
 
-idea:idea,
+brand:brand,
 
-scene:"concept "+i,
+category:analysis.category,
 
-style:"cinematic advertising",
+brand_style:analysis.style,
 
-camera:"dramatic composition",
+campaign:campaign,
 
-lighting:"epic cinematic lighting",
+concept:"ad concept "+i,
 
-prompt:idea+" cinematic advertising scene "+i+" ultra detailed 8k dramatic lighting"
+prompt:brand+" "+campaign+" cinematic advertisement "+analysis.style+" dramatic lighting ultra realistic"
 
 })
 
 }
 
-document.getElementById("promptOutput").textContent=
-JSON.stringify(prompts,null,2)
+let result={
+
+brand_analysis:analysis,
+
+prompts:prompts
 
 }
 
+document.getElementById("output").textContent=
+JSON.stringify(result,null,2)
+
+}
+
+
 function copyPrompts(){
 
-let text=document.getElementById("promptOutput").textContent
+let text=document.getElementById("output").textContent
 
 navigator.clipboard.writeText(text)
 
