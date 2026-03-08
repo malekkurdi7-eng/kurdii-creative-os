@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kurdii Money Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kurdii Money Dashboard</title>
 
 <style>
 
@@ -11,18 +10,7 @@ body{
 font-family:Arial;
 background:#0f172a;
 color:white;
-margin:0;
 padding:20px;
-}
-
-h1{
-text-align:center;
-margin-bottom:30px;
-}
-
-.container{
-max-width:500px;
-margin:auto;
 }
 
 .card{
@@ -34,27 +22,99 @@ margin-bottom:20px;
 
 input{
 width:100%;
-padding:12px;
+padding:10px;
 margin-top:10px;
-border-radius:8px;
-border:none;
 }
 
 button{
-margin-top:12px;
-padding:12px;
-border:none;
-border-radius:8px;
+margin-top:10px;
+padding:10px;
 background:#6366f1;
 color:white;
-cursor:pointer;
-width:100%;
+border:none;
+border-radius:6px;
 }
 
-.result{
-font-size:20px;
-margin-top:10px;
+</style>
+
+</head>
+
+<body>
+
+<h1>Kurdii Money Tracker</h1>
+
+<div class="card">
+
+<h3>دخل</h3>
+
+<input id="income" placeholder="ادخل المبلغ">
+
+<button onclick="addIncome()">Add Income</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>مصروف</h3>
+
+<input id="expense" placeholder="ادخل المصروف">
+
+<button onclick="addExpense()">Add Expense</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>النتائج</h3>
+
+<p>Total Income: <span id="incomeTotal">0</span></p>
+
+<p>Total Expense: <span id="expenseTotal">0</span></p>
+
+<p>Balance: <span id="balance">0</span></p>
+
+</div>
+
+
+
+<script>
+
+let incomeTotal=0
+let expenseTotal=0
+
+function addIncome(){
+
+let value=Number(document.getElementById("income").value)
+
+incomeTotal+=value
+
+update()
+
 }
 
-.green{color:#22c55e;}
-.red{color
+function addExpense(){
+
+let value=Number(document.getElementById("expense").value)
+
+expenseTotal+=value
+
+update()
+
+}
+
+function update(){
+
+let balance=incomeTotal-expenseTotal
+
+document.getElementById("incomeTotal").innerText=incomeTotal
+document.getElementById("expenseTotal").innerText=expenseTotal
+document.getElementById("balance").innerText=balance
+
+}
+
+</script>
+
+</body>
+</html>
