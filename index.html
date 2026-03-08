@@ -4,72 +4,143 @@
 <head>
 
 <meta charset="UTF-8">
-
 <title>Kurdii Creative OS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
 body{
 
-font-family:Arial;
-
-background:#050b18;
-
+background:linear-gradient(120deg,#020617,#0f172a,#020617);
 color:white;
-
-padding:20px;
+min-height:100vh;
 
 }
 
-h1{
+/* HERO */
 
+.hero{
+
+height:40vh;
+background:url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee") center/cover;
+display:flex;
+align-items:center;
+justify-content:center;
 text-align:center;
 
-margin-bottom:40px;
+}
+
+.hero h1{
+
+font-size:42px;
+background:rgba(0,0,0,0.55);
+padding:20px 40px;
+border-radius:10px;
 
 }
 
-.section{
+/* DASHBOARD */
 
-margin-bottom:30px;
+.dashboard{
+
+padding:30px;
 
 }
+
+/* GRID */
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+
+}
+
+/* CARDS */
 
 .card{
 
-background:#0f172a;
+background:linear-gradient(145deg,#0f172a,#1e293b);
+padding:25px;
+border-radius:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+transition:0.3s;
 
-padding:15px;
+}
 
-border-radius:12px;
+.card:hover{
 
+transform:translateY(-6px) scale(1.03);
+
+}
+
+/* BUTTONS */
+
+.btn{
+
+display:block;
+margin-top:12px;
+padding:12px;
+text-align:center;
+border-radius:8px;
+text-decoration:none;
+color:white;
+background:linear-gradient(45deg,#2563eb,#7c3aed);
+transition:0.3s;
+
+}
+
+.btn:hover{
+
+background:linear-gradient(45deg,#9333ea,#2563eb);
+
+}
+
+/* SECTION */
+
+.section{
+
+margin-top:40px;
+
+}
+
+.section h2{
+
+margin-bottom:15px;
+color:#60a5fa;
+
+}
+
+/* IDEA BOX */
+
+.idea{
+
+background:#020617;
+padding:20px;
+border-radius:10px;
 margin-top:10px;
 
 }
 
-button{
+.generate{
 
+margin-top:10px;
+padding:12px;
 width:100%;
-
-padding:14px;
-
-margin:6px 0;
-
-background:#1e293b;
-
+background:#22c55e;
 border:none;
-
 border-radius:8px;
-
 color:white;
-
 font-size:16px;
-
-}
-
-button:hover{
-
-background:#334155;
 
 }
 
@@ -77,26 +148,56 @@ background:#334155;
 
 </head>
 
+
 <body>
 
-<h1>Kurdii Creative OS</h1>
+<div class="hero">
+
+<h1>Kurdii Creative AI Studio</h1>
+
+</div>
+
+
+<div class="dashboard">
 
 
 <div class="section">
 
 <h2>Quick Tools</h2>
 
+<div class="grid">
+
 <div class="card">
 
-<button onclick="go('https://www.instagram.com/dreamway_dmc')">Instagram DreamWay</button>
+<h3>Instagram</h3>
 
-<button onclick="go('https://chat.openai.com')">ChatGPT</button>
+<a class="btn" href="https://www.instagram.com/dreamway_dmc" target="_blank">Open</a>
 
-<button onclick="go('https://mail.google.com')">Gmail</button>
+</div>
 
-<button onclick="go('https://www.behance.net')">Behance</button>
+<div class="card">
 
-<button onclick="go('https://www.freepik.com')">Freepik</button>
+<h3>ChatGPT</h3>
+
+<a class="btn" href="https://chat.openai.com" target="_blank">Open</a>
+
+</div>
+
+<div class="card">
+
+<h3>Freepik</h3>
+
+<a class="btn" href="https://freepik.com" target="_blank">Open</a>
+
+</div>
+
+<div class="card">
+
+<h3>Behance</h3>
+
+<a class="btn" href="https://behance.net" target="_blank">Open</a>
+
+</div>
 
 </div>
 
@@ -107,13 +208,13 @@ background:#334155;
 
 <h2>AI Idea Generator</h2>
 
-<div class="card">
+<div class="idea" id="ideaBox">
 
-<button onclick="generateIdea()">Generate Creative Idea</button>
-
-<p id="idea"></p>
+Press Generate to create an idea
 
 </div>
+
+<button class="generate" onclick="generateIdea()">Generate Creative Idea</button>
 
 </div>
 
@@ -122,22 +223,70 @@ background:#334155;
 
 <h2>Daily Training</h2>
 
+<div class="grid">
+
 <div class="card">
 
-<p>Illustrator Training: Create futuristic travel logo</p>
-
-<p>Photoshop Training: Cinematic desert poster</p>
+Illustrator Challenge  
+Create futuristic travel logo for Jordan tourism brand.
 
 </div>
+
+<div class="card">
+
+Photoshop Challenge  
+Create cinematic desert poster with Wadi Rum atmosphere.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<h2>Freelance Platforms</h2>
+
+<div class="grid">
+
+<div class="card">
+
+Upwork
+
+<a class="btn" href="https://upwork.com" target="_blank">Explore</a>
+
+</div>
+
+<div class="card">
+
+Fiverr
+
+<a class="btn" href="https://fiverr.com" target="_blank">Explore</a>
+
+</div>
+
+<div class="card">
+
+Contra
+
+<a class="btn" href="https://contra.com" target="_blank">Explore</a>
+
+</div>
+
+</div>
+
+</div>
+
 
 </div>
 
 
 <script>
 
-function go(url){
+function random(arr){
 
-window.open(url,'_blank')
+return arr[Math.floor(Math.random()*arr.length)]
 
 }
 
@@ -145,25 +294,34 @@ function generateIdea(){
 
 let ideas=[
 
-"Petra cinematic tourism poster",
+"Create cinematic Petra tourism campaign",
 
-"Luxury Arabic coffee advertisement",
+"Design luxury Arabic coffee advertisement",
 
-"Desert adventure campaign",
+"Create futuristic Jordan travel poster",
 
-"Minimalist travel brand identity",
+"Wadi Rum adventure reel concept",
 
-"AI futuristic tourism poster"
+"Minimalist Arabic typography travel brand",
+
+"AI generated desert fashion campaign",
+
+"Luxury Dead Sea resort advertisement",
+
+"Create Instagram carousel about Petra history",
+
+"Jordan tourism AI poster series",
+
+"Arabic coffee cinematic product ad"
 
 ]
 
-document.getElementById("idea").innerText=
-
-ideas[Math.floor(Math.random()*ideas.length)]
+document.getElementById("ideaBox").innerText=random(ideas)
 
 }
 
 </script>
+
 
 </body>
 
