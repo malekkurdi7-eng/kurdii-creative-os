@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kurdii Money Dashboard</title>
+<title>Tour Pricing Tool</title>
 
 <style>
 
@@ -13,104 +14,149 @@ color:white;
 padding:20px;
 }
 
+.container{
+max-width:700px;
+margin:auto;
+}
+
 .card{
 background:#1e293b;
 padding:20px;
-border-radius:12px;
+border-radius:10px;
 margin-bottom:20px;
 }
 
-input{
+textarea,input,select{
 width:100%;
 padding:10px;
-margin-top:10px;
+margin-top:8px;
+border-radius:6px;
+border:none;
 }
 
 button{
 margin-top:10px;
-padding:10px;
+padding:12px;
 background:#6366f1;
-color:white;
 border:none;
+color:white;
 border-radius:6px;
+width:100%;
+}
+
+.result{
+font-size:18px;
+margin-top:10px;
 }
 
 </style>
-
 </head>
 
 <body>
 
-<h1>Kurdii Money Tracker</h1>
+<h1>Tour Pricing Calculator</h1>
+
+<div class="container">
 
 <div class="card">
 
-<h3>دخل</h3>
+<h3>اكتب البرنامج السياحي</h3>
 
-<input id="income" placeholder="ادخل المبلغ">
+<textarea id="program" rows="6" placeholder="Day1 Airport Amman
+Day2 Amman Petra Amman
+Day3 Amman Allenby"></textarea>
 
-<button onclick="addIncome()">Add Income</button>
+عدد الليالي
+<input id="nights" type="number">
+
+عدد الأشخاص
+<input id="people" type="number">
+
+الفندق
+<select id="hotel">
+<option value="50">3 Star</option>
+<option value="80">4 Star</option>
+<option value="120">5 Star</option>
+</select>
+
+نسبة الربح %
+<input id="profit" type="number">
+
+<button onclick="calculate()">Calculate</button>
 
 </div>
-
 
 <div class="card">
 
-<h3>مصروف</h3>
+<div class="result">Full Bus Days: <span id="fullBus">0</span></div>
 
-<input id="expense" placeholder="ادخل المصروف">
+<div class="result">Half Bus Days: <span id="halfBus">0</span></div>
 
-<button onclick="addExpense()">Add Expense</button>
+<div class="result">Total Cost: <span id="total">0</span>$</div>
 
-</div>
+<div class="result">Price Per Person: <span id="perPerson">0</span>$</div>
 
-
-<div class="card">
-
-<h3>النتائج</h3>
-
-<p>Total Income: <span id="incomeTotal">0</span></p>
-
-<p>Total Expense: <span id="expenseTotal">0</span></p>
-
-<p>Balance: <span id="balance">0</span></p>
+<div class="result">Price With Profit: <span id="withProfit">0</span>$</div>
 
 </div>
 
+</div>
 
 
 <script>
 
-let incomeTotal=0
-let expenseTotal=0
+function calculate(){
 
-function addIncome(){
+let text=document.getElementById("program").value
 
-let value=Number(document.getElementById("income").value)
+let lines=text.split("\n")
 
-incomeTotal+=value
+let full=0
+let half=0
 
-update()
+lines.forEach(day=>{
+
+let words=day.trim().split(" ")
+
+if(words.length<=2){
+
+half++
+
+}else{
+
+full++
 
 }
 
-function addExpense(){
+})
 
-let value=Number(document.getElementById("expense").value)
+let nights=Number(document.getElementById("nights").value)
 
-expenseTotal+=value
+let people=Number(document.getElementById("people").value)
 
-update()
+let hotel=Number(document.getElementById("hotel").value)
 
-}
+let profit=Number(document.getElementById("profit").value)
 
-function update(){
+let busCost=(full*600)+(half*300)
 
-let balance=incomeTotal-expenseTotal
+let guideCost=lines.length*130
 
-document.getElementById("incomeTotal").innerText=incomeTotal
-document.getElementById("expenseTotal").innerText=expenseTotal
-document.getElementById("balance").innerText=balance
+let lunchCost=lines.length*10*people
+
+let hotelCost=nights*hotel*people
+
+let total=busCost+guideCost+lunchCost+hotelCost
+
+let perPerson=total/people
+
+let withProfit=perPerson+(perPerson*(profit/100))
+
+document.getElementById("fullBus").innerText=full
+document.getElementById("halfBus").innerText=half
+document.getElementById("total").innerText=total
+document.getElementById("perPerson").innerText=perPerson.toFixed(2)
+document.getElementById("withProfit").innerText=withProfit.toFixed(2)
 
 }
 
